@@ -77,6 +77,7 @@ module.exports = {
                 { loose: true },
               ],
               'react-native-web',
+              '@babel/plugin-transform-modules-commonjs',
             ],
           },
         },
