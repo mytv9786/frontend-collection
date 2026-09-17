@@ -1,28 +1,5 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-
-// Sample initial data
-const initialData = [
-  {
-    id: '1',
-    cbpNo: 'CBP001',
-    cbpName: 'Global Tech',
-    contactName: 'John Doe',
-    contactNumber: '9988776655',
-    email: 'john@globaltech.com',
-    address: 'Banjara Hills, Hyderabad',
-    accountManager: 'Sai teja', // ID from ManagerContext
-  },
-  {
-    id: '2',
-    cbpNo: 'CBP002',
-    cbpName: 'Apple Net',
-    contactName: 'John Doe',
-    contactNumber: '9988776655',
-    email: 'john@globaltech.com',
-    address: 'Banjara Hills, Hyderabad',
-    accountManager: 'Sai teja M', // ID from ManagerContext
-  },
-];
+import { baseApi } from '../Services/BaseApi';
 
 export const CustomerContext = createContext();
 
@@ -51,7 +28,7 @@ export const CustomerContextProvider = ({ children }) => {
   // You can implement API fetching here similar to your ManagerContext
   const fetchCustomersData = async () => {
     try {
-      const response = await fetch('http://192.168.88.137:5000/api/customers', {
+      const response = await fetch(`${baseApi}/api/customers`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

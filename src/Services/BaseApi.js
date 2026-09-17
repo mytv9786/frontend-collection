@@ -1,1 +1,1 @@
-export const baseApi = 'http://localhost:5000/api';
+export const baseApi = 'https://backend-collection-production.up.railway.app';

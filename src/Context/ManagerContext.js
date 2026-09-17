@@ -6,6 +6,7 @@ import React, {
   useCallback,
 } from 'react';
 import { AuthContext } from './AuthContext';
+import { baseApi } from '../Services/BaseApi';
 
 export const ManagerContext = createContext();
 
@@ -51,7 +52,7 @@ export const ManagerContextProvider = ({ children }) => {
     const fetchManagers = async () => {
       if (!token) return;
       try {
-        const response = await fetch('http://192.168.88.137:5000/api/users/', {
+        const response = await fetch(`${baseApi}/api/users/`, {
           method: 'GET', //  FIX 2: Method belongs here, outside the headers block!
           headers: {
             'Content-Type': 'application/json',
@@ -77,26 +78,23 @@ export const ManagerContextProvider = ({ children }) => {
   async function addManager(formData) {
     console.log(formData);
     try {
-      const response = await fetch(
-        `http://192.168.88.137:5000/api/users/register`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            employee_id: formData.employeeId,
-            username: formData.username,
-            password: formData.password,
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            email: formData.email,
-            mobile: formData.mobile,
-            role_id: formData.roleId, // FIXED: Sending ID, not Name
-          }),
+      const response = await fetch(`${baseApi}/api/users/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
-      );
+        body: JSON.stringify({
+          employee_id: formData.employeeId,
+          username: formData.username,
+          password: formData.password,
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          mobile: formData.mobile,
+          role_id: formData.roleId, // FIXED: Sending ID, not Name
+        }),
+      });
 
       const result = await response.json();
 

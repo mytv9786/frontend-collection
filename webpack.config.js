@@ -8,7 +8,7 @@ module.exports = {
   entry: ['regenerator-runtime/runtime', path.join(__dirname, 'index.web.js')],
   output: {
     path: path.resolve(appDirectory, 'dist'),
-    publicPath: '/',
+    publicPath: '',
     filename: 'rnw_blogpost.bundle.js',
   },
   resolve: {

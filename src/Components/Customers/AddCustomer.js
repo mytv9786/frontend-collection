@@ -14,6 +14,7 @@ import { CustomerContext } from '../../Context/CustomerContext';
 import { useInputCardWidth } from '../../Constants';
 import InputField from '../../UI/InputField';
 import CustomPicker from '../../UI/CustomPicker';
+import { baseApi } from '../../Services/BaseApi';
 
 const AddCustomer = ({ navigation, visible, mainScreenWidth }) => {
   const { managers } = useContext(ManagerContext);
@@ -54,7 +55,7 @@ const AddCustomer = ({ navigation, visible, mainScreenWidth }) => {
     setLoading(true);
     try {
       // 1. Send to Backend API
-      const response = await fetch('http://192.168.88.137:5000/api/customers', {
+      const response = await fetch(`${baseApi}/api/customers`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

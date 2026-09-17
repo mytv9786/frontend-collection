@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { baseApi } from '../../Services/BaseApi';
 //import { DataTable } from 'react-native-paper';
 
 const DetailRow = ({ label, value, valueStyle }) => (
@@ -39,7 +40,7 @@ const CustomerDetails = ({ navigation, route }) => {
       setLoading(true);
       try {
         const response = await fetch(
-          `http://192.168.88.137:5000/api/payments/individual/${cbpName}`,
+          `${baseApi}/api/payments/individual/${cbpName}`,
           {
             method: 'GET',
             headers: {

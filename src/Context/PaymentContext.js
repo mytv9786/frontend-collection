@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { Alert } from 'react-native';
 import { AuthContext } from './AuthContext';
+import { baseApi } from '../Services/BaseApi';
 
 export const PaymentContext = createContext();
 
@@ -25,16 +26,13 @@ export const PaymentContextProvider = ({ children }) => {
   useEffect(() => {
     const initialPayment = async () => {
       try {
-        const response = await fetch(
-          `http://192.168.88.137:5000/api/payments`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
+        const response = await fetch(`${baseApi}/api/payments`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
-        );
+        });
 
         if (response.ok) {
           const result = await response.json();
@@ -68,7 +66,7 @@ export const PaymentContextProvider = ({ children }) => {
 
   const addPayment = async form => {
     try {
-      const response = await fetch('http://192.168.88.137:5000/api/payments', {
+      const response = await fetch(`${baseApi}/api/payments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

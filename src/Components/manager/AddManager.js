@@ -15,6 +15,7 @@ import { useInputCardWidth } from '../../Constants';
 
 import InputField from '../../UI/InputField';
 import CustomPicker from '../../UI/CustomPicker';
+import { baseApi } from '../../Services/BaseApi';
 
 const AddManager = ({ navigation, visible }) => {
   const { addManager } = useContext(ManagerContext);
@@ -70,12 +71,9 @@ const AddManager = ({ navigation, visible }) => {
   useEffect(() => {
     const fetchRoleData = async () => {
       try {
-        const response = await fetch(
-          'http://192.168.88.137:5000/api/users/roles',
-          {
-            method: 'GET',
-          },
-        );
+        const response = await fetch(`${baseApi}/api/users/roles`, {
+          method: 'GET',
+        });
         if (response.ok) {
           const rolesData = await response.json();
           setRoles(rolesData);

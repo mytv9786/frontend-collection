@@ -52,16 +52,13 @@ export const AuthContextProvider = ({ children }) => {
         //console.log(token);
         if (token) {
           // Verify token with backend
-          const response = await fetch(
-            `http://192.168.88.137:5000/api/users/profile`,
-            {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-              },
+          const response = await fetch(`${baseApi}/api/users/profile`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
             },
-          );
+          });
           if (response.ok) {
             const result = await response.json();
             console.log(result);
@@ -94,16 +91,13 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
   const login = async (email, password) => {
     try {
-      const response = await fetch(
-        'http://192.168.88.137:5000/api/users/login',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username: email, password: password }),
+      const response = await fetch(`${baseApi}/api/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify({ username: email, password: password }),
+      });
 
       const result = await response.json();
 
