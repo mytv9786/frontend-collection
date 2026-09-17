@@ -9,6 +9,9 @@
 
     <script>
       var exports = {};
+      var require = function (key) {
+        return window[key];
+      };
     </script>
     <style>
       html,
