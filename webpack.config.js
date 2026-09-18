@@ -118,6 +118,7 @@ const appDirectory = path.resolve(__dirname);
 
 module.exports = {
   entry: ['regenerator-runtime/runtime', path.join(__dirname, 'index.web.js')],
+  devtool: 'source-map', // ← ఇది add చేయండి
   output: {
     path: path.resolve(appDirectory, 'dist'),
     publicPath: '',
