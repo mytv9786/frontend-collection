@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+//import AsyncStorage from '@react-native-async-storage/async-storage';
 import { baseApi } from '../Services/BaseApi';
+import Storage from '../UI/Storage';
 
 export const AuthContext = createContext();
 
@@ -48,7 +49,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const bootstrapAsync = async () => {
       try {
-        const token = await AsyncStorage.getItem('authToken');
+        const token = await Storage.getItem('authToken');
         //console.log(token);
         if (token) {
           // Verify token with backend
@@ -91,13 +92,16 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
   const login = async (email, password) => {
     try {
-      const response = await fetch(`${baseApi}/api/users/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `https://backend-collection-production.up.railway.app/api/users/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username: email, password: password }),
         },
-        body: JSON.stringify({ username: email, password: password }),
-      });
+      );
 
       const result = await response.json();
 
@@ -105,7 +109,7 @@ export const AuthContextProvider = ({ children }) => {
         // Use the key names returned by your specific backend (e.g., result.token)
         const token = result.token;
         const user = result.user;
-        await AsyncStorage.setItem('authToken', token);
+        await Storage.setItem('authToken', token);
         dispatch({
           type: 'LOGIN',
           payload: { token, user },
@@ -138,7 +142,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await AsyncStorage.removeItem('authToken');
+    await Storage.removeItem('authToken');
     dispatch({ type: 'LOGOUT' });
   };
 
