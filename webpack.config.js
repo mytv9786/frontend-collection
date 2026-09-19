@@ -13,7 +13,7 @@ module.exports = {
     filename: 'rnw_blogpost.bundle.js',
   },
   resolve: {
-    extensions: ['.web.tsx', '.web.ts', '.web.js', '.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.js', '.ts', '.web.tsx', '.web.ts', '.web.js'],
     alias: {
       'react-native$': 'react-native-web',
       'react-native-vector-icons/dist/MaterialCommunityIcons':
