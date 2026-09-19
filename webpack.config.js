@@ -49,10 +49,15 @@ module.exports = {
             filePath.includes('node_modules/expo-') ||
             filePath.includes('node_modules/react-native-vector-icons') ||
             filePath.includes('node_modules/@expo/vector-icons') ||
-            filePath.includes('node_modules/@react-native-async-storage') ||
+            filePath.includes(
+              'node_modules/@react-native-async-storage//async-storage',
+            ) ||
             filePath.includes('node_modules/@react-native-picker/picker') ||
             filePath.includes('node_modules/react-native-chart-kit') ||
             filePath.includes('node_modules/react-native-svg') ||
+            filePath.include(
+              'node_modules/@react-native-async-storage/async-storage',
+            ) ||
             filePath.includes('node_modules/lucide-react-native')
           ) {
             return true;
