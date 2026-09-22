@@ -279,9 +279,7 @@ module.exports = {
             filePath.includes('node_modules/@react-native-picker/picker') ||
             filePath.includes('node_modules/react-native-chart-kit') ||
             filePath.includes('node_modules/react-native-svg') ||
-            filePath.includes('node_modules/lucide-react-native') ||
-            filePath.include('node_modules/@react-navigation/stack') ||
-            filePath.include('node_modules/react-native-gesture-handler')
+            filePath.includes('node_modules/lucide-react-native')
           ) {
             return true;
           }
