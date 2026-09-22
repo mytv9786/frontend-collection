@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
-import AppProvider from './src/AppProviders';
 import StackNavigationss from './src/Navigations/StackNavigationss';
 
-const App1 = () => {
+const App = () => {
   return (
     <NavigationContainer>
       <StackNavigationss />
@@ -12,4 +11,4 @@ const App1 = () => {
   );
 };
 
-export default App1;
+export default App;

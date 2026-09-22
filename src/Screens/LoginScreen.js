@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,13 +9,10 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-//import { SafeAreaView } from 'react-native-safe-area-context';
-//import { AuthContext } from '../Context/AuthContext';
+
 import { baseApi } from '../Services/BaseApi';
 
 const LoginScreen = ({ navigation }) => {
-  //const { login } = useContext(AuthContext);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
