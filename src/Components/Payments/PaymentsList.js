@@ -10,7 +10,7 @@ import {
 
 import { useNavigation } from '@react-navigation/native';
 import { PaymentContext } from '../../Context/PaymentContext';
-import { SafeAreaView } from 'react-native-safe-area-context';
+//import { SafeAreaView } from 'react-native-safe-area-context';
 import { CustomerContext } from '../../Context/CustomerContext';
 
 const PaymentsList = ({ route, visible }) => {
@@ -70,7 +70,7 @@ const PaymentsList = ({ route, visible }) => {
   }, [payments, filterType, customers]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>
           {filterType === 'paid' ? 'Paid Transactions' : 'All Transactions'}
@@ -196,7 +196,7 @@ const PaymentsList = ({ route, visible }) => {
       >
         <Text style={styles.fabText}>+</Text>
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -9,7 +9,7 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+//import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from '../Context/AuthContext';
 //import { baseApi } from '../../services/baseApi';
 
@@ -51,7 +51,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.content}>
         <Image
           source={{ uri: 'https://via.placeholder.com' }}
@@ -108,7 +108,7 @@ const LoginScreen = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

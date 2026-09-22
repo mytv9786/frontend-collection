@@ -7,7 +7,7 @@ import {
   Alert,
   ScrollView,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+//import { SafeAreaView } from 'react-native-safe-area-context';
 import { baseApi } from '../../Services/BaseApi';
 //import { DataTable } from 'react-native-paper';
 
@@ -84,7 +84,7 @@ const CustomerDetails = ({ navigation, route }) => {
   }, [cbpName]);
   //console.log(customerDetailsData);
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerText}>Customer Details</Text>
@@ -200,7 +200,7 @@ const CustomerDetails = ({ navigation, route }) => {
           </ScrollView>
         )}
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

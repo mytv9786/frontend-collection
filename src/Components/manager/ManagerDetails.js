@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+//import { SafeAreaView } from 'react-native-safe-area-context';
 import { CustomerContext } from '../../Context/CustomerContext';
 //import { DataTable } from 'react-native-paper';
 
@@ -29,7 +29,7 @@ const ManagerDetails = ({ route }) => {
   const from = page * itemsPerPage;
   const to = Math.min((page + 1) * itemsPerPage, historyList.length);
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton}>
@@ -101,7 +101,7 @@ const ManagerDetails = ({ route }) => {
           </ScrollView>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

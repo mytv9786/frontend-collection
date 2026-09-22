@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+//import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Header = ({ visible, setVisible, logout }) => {
   //const [visible, setVisible] = useState(false);
 
   return (
-    <SafeAreaView>
+    <View>
       {/* ─── GLOBAL FIXED HEADER ─── */}
       <View style={styles.headerContainer}>
         <TouchableOpacity
@@ -26,7 +26,7 @@ const Header = ({ visible, setVisible, logout }) => {
           <Text style={styles.logoutIcon}>➜</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

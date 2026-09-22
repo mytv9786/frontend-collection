@@ -10,7 +10,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { PaymentContext } from '../Context/PaymentContext';
-import { SafeAreaView } from 'react-native-safe-area-context';
+//import { SafeAreaView } from 'react-native-safe-area-context';
 import { LineChart, BarChart, PieChart } from 'react-native-chart-kit/v2';
 import HomePaymentsCard from '../Components/HomePaymentsCard';
 import {
@@ -88,7 +88,7 @@ const HomeScreen = ({ navigation, visible }) => {
   ];
 
   return (
-    <SafeAreaView style={[styles.homeContainer]}>
+    <View style={[styles.homeContainer]}>
       <StatusBar barStyle="dark-content" backgroundColor="#F4F6F9" />
       <ScrollView
         style={styles.outerScrollView}
@@ -317,7 +317,7 @@ const HomeScreen = ({ navigation, visible }) => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
