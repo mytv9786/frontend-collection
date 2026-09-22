@@ -10,11 +10,11 @@ import {
   ActivityIndicator,
 } from 'react-native';
 //import { SafeAreaView } from 'react-native-safe-area-context';
-import { AuthContext } from '../Context/AuthContext';
-//import { baseApi } from '../../services/baseApi';
+//import { AuthContext } from '../Context/AuthContext';
+import { baseApi } from '../../services/baseApi';
 
 const LoginScreen = ({ navigation }) => {
-  const { login } = useContext(AuthContext);
+  //const { login } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,7 +35,18 @@ const LoginScreen = ({ navigation }) => {
       }
 
       setLoading(true);
-      const result = await login(email, password);
+      //const result = await login(email, password);
+
+      const response = await fetch(`${baseApi}/api/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: email, password: password }),
+      });
+
+      const result = await response.json();
+
       if (result.success) {
         Alert.alert('Success', result.message);
         setError(result.message);
