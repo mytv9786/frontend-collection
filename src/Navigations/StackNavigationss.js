@@ -13,7 +13,6 @@ const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
   const { isAuthenticated } = useContext(AuthContext);
-  console.log(isAuthenticated);
 
   return (
     <Stack.Navigator
