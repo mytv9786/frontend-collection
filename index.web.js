@@ -1,15 +1,23 @@
-// 1. 🟢 అందరికంటే ముందే, ఫస్ట్ లైన్ లోనే ఈ సేఫ్టీ గార్డ్ ఉండాలి (ఇంపోర్ట్స్ కంటే ముందే!)
-if (typeof Object.keys === 'function') {
-  const originalKeys = Object.keys;
-  Object.keys = function (obj) {
-    if (obj === null || obj === undefined) {
-      return [];
-    }
-    return originalKeys(obj);
+// 1. 🟢 ప్రొడクション బిల్డ్ లోని అన్ని రకాల ఆబ్జెక్ట్ క్రాష్‌లను ఆపడానికి అల్టిమేట్ గార్డ్
+(function () {
+  const safeWrap = originalFn => {
+    if (typeof originalFn !== 'function') return originalFn;
+    return function (obj) {
+      if (obj === null || obj === undefined) return [];
+      try {
+        return originalFn(obj);
+      } catch (e) {
+        return [];
+      }
+    };
   };
-}
 
-// 2. దీని తర్వాతే మీ మిగిలిన పాత ఇంపోర్ట్స్ అన్నీ రావాలి
+  Object.keys = safeWrap(Object.keys);
+  Object.values = safeWrap(Object.values);
+  Object.entries = safeWrap(Object.entries);
+})();
+
+// 2. మీ ఒరిజినల్ పాత ఇంపోర్ట్స్ అన్నీ దీని కిందే ఉండాలి
 import 'regenerator-runtime/runtime';
 import { AppRegistry } from 'react-native';
 import App from './App';
