@@ -151,8 +151,8 @@ export const AuthContextProvider = ({ children }) => {
       value={{
         ...state,
         isAuthenticated: !!state.token,
-        token: state.token,
-        user: state.user,
+        token: state.token || null,
+        user: state.user || {},
         login,
         logout,
         register,
