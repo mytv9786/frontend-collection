@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 //import { SafeAreaView } from 'react-native-safe-area-context';
 //import { AuthContext } from '../Context/AuthContext';
-import { baseApi } from '../../services/baseApi';
+import { baseApi } from '../Services/BaseApi';
 
 const LoginScreen = ({ navigation }) => {
   //const { login } = useContext(AuthContext);

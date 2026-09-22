@@ -6,11 +6,9 @@ import StackNavigationss from './src/Navigations/StackNavigationss';
 
 const App1 = () => {
   return (
-    <AppProvider>
-      <NavigationContainer>
-        <StackNavigationss />
-      </NavigationContainer>
-    </AppProvider>
+    <NavigationContainer>
+      <StackNavigationss />
+    </NavigationContainer>
   );
 };
 
