@@ -1,12 +1,17 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 
-const App = () => {
+import AppProvider from './src/AppProviders';
+import StackNavigationss from './src/Navigations/StackNavigationss';
+
+const App1 = () => {
   return (
-    <View>
-      <Text>App</Text>
-    </View>
+    <AppProvider>
+      <NavigationContainer>
+        <StackNavigationss />
+      </NavigationContainer>
+    </AppProvider>
   );
 };
 
-export default App;
+export default App1;

@@ -25,9 +25,9 @@ const StackNavigation = () => {
       ) : (
         <>
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
-          <Stack.Screen name="Dashboard" component={Dashboard} />
+          {/* <Stack.Screen name="Dashboard" component={Dashboard} />
           <Stack.Screen name="AddManager" component={AddManger} />
-          <Stack.Screen name="AddCustomer" component={AddCustomer} />
+          <Stack.Screen name="AddCustomer" component={AddCustomer} /> */}
         </>
       )}
     </Stack.Navigator>
