@@ -1,11 +1,14 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// ❌ పాత native-stack ఇంపోర్ట్ తీసేశాము
+// 🟢 కొత్త స్టాండర్డ్ stack ఇంపోర్ట్ యాడ్ చేశాము
+import { createStackNavigator } from '@react-navigation/stack';
 
 import LoginScreen from '../Screens/LoginScreen';
 
-const Stack = createNativeStackNavigator();
+// Native Stack కి బదులుగా నార్మల్ Stack వాడాలి
+const Stack = createStackNavigator();
 
-const StackNavigation = () => {
+const StackNavigationss = () => {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
@@ -16,4 +19,4 @@ const StackNavigation = () => {
   );
 };
 
-export default StackNavigation;
+export default StackNavigationss;
