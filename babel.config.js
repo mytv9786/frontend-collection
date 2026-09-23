@@ -1,4 +1,13 @@
+// module.exports = {
+//   // ఆండ్రాయిడ్ యాప్ కోసం కేవలం ఈ ఒక్క అఫీషియల్ ప్రెసెట్ మాత్రమే ఉండాలి
+//   presets: ['module:@react-native/babel-preset'],
+// };
+
 module.exports = {
-  // ఆండ్రాయిడ్ యాప్ కోసం కేవలం ఈ ఒక్క అఫీషియల్ ప్రెసెట్ మాత్రమే ఉండాలి
   presets: ['module:@react-native/babel-preset'],
+  env: {
+    production: {
+      plugins: ['react-native-paper/babel'], // ఒకవేళ వాడితే, లేకపోతే ఖాళీగా ఉంచొచ్చు
+    },
+  },
 };
