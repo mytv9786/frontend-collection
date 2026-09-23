@@ -65,7 +65,7 @@ const LoginScreen = ({ navigation }) => {
           source={{ uri: 'https://via.placeholder.com' }}
           style={styles.logo}
         />
-        <Text style={styles.title}>Welcome</Text>
+        <Text style={styles.title}>Wel come</Text>
 
         <TextInput
           style={styles.input}
