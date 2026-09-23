@@ -2,13 +2,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
 import StackNavigationss from './src/Navigations/StackNavigationss';
+import LoginScreen from './src/Screens/LoginScreen';
 
 const App = () => {
-  return (
-    <NavigationContainer>
-      <StackNavigationss />
-    </NavigationContainer>
-  );
+  return <LoginScreen />;
 };
 
 export default App;
