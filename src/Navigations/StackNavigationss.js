@@ -4,6 +4,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import LoginScreen from '../Screens/LoginScreen';
+import ProfileScreen from '../Screens/ProfileScreen';
 
 // Native Stack కి బదులుగా నార్మల్ Stack వాడాలి
 const Stack = createStackNavigator();
@@ -14,7 +15,7 @@ const StackNavigationss = () => {
       screenOptions={{ headerShown: false }}
       initialRouteName="LoginScreen"
     >
-      <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen name="LoginScreen" component={ProfileScreen} />
     </Stack.Navigator>
   );
 };
