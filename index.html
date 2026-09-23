@@ -1,34 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <title>RN Web</title>
-
-    <script>
-      var exports = {};
-      var require = function (key) {
-        return window[key];
-      };
-    </script>
+    <title>React Native Cross Platform App</title>
     <style>
+      /* వెబ్‌లో స్క్రోలింగ్ స్మూత్‌గా ఉండటానికి */
       html,
-      body {
+      body,
+      #app-root {
+        width: 100%;
+        height: 100%;
         margin: 0;
         padding: 0;
-        height: 100%;
-        width: 100%;
-        background-color: #f4f6f9;
-        overflow-x: hidden;
-      }
-
-      #app-root {
-        display: flex;
-        flex-direction: column;
-        width: 100vw;
-        height: 100vh;
+        overflow: hidden;
       }
     </style>
   </head>
