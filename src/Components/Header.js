@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { COLOR } from '../Constants';
 //import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Header = ({ visible, setVisible, logout }) => {
@@ -26,6 +27,7 @@ const Header = ({ visible, setVisible, logout }) => {
           <Text style={styles.logoutIcon}>➜</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.horizontalLine} />
     </View>
   );
 };
@@ -33,7 +35,7 @@ const Header = ({ visible, setVisible, logout }) => {
 const styles = StyleSheet.create({
   headerContainer: {
     height: 60,
-    backgroundColor: '#949aee',
+    //backgroundColor: '#949aee',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContext: 'space-between',
@@ -41,12 +43,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   toggleButton: { padding: 10, borderRadius: 5 },
-  buttonText: { color: '#FFFFFF', fontSize: 20, fontWeight: 'bold' },
+  buttonText: {
+    color: COLOR.darkCharcoalBrown,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
   titleArea: { alignItems: 'center' },
-  mainTitle: { color: '#FFFFFF', fontSize: 16, fontWeight: 'bold' },
-  subText: { color: '#CCCCCC', fontSize: 11, marginTop: 2 },
-  logoutIcon: { color: '#000000', fontSize: 16, fontWeight: 'bold' },
+  mainTitle: {
+    color: COLOR.darkCharcoalBrown,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  subText: { color: COLOR.darkCharcoalBrown, fontSize: 11, marginTop: 2 },
+  logoutIcon: {
+    color: COLOR.darkCharcoalBrown,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   bgColor: { backgroundColor: '#FFFFFF' },
+  horizontalLine: {
+    borderBottomWidth: 2,
+    borderColor: '#000',
+  },
 });
 
 export default Header;

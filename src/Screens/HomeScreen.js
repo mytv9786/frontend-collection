@@ -15,6 +15,7 @@ import { LineChart, BarChart, PieChart } from 'react-native-chart-kit/v2';
 import HomePaymentsCard from '../Components/HomePaymentsCard';
 import {
   useHomeCardWidth,
+  COLOR,
   COLORS,
   BACKGROUND_COLORS,
   SPACING,
@@ -108,7 +109,7 @@ const HomeScreen = ({ navigation, visible }) => {
                 onPress={() =>
                   navigation.navigate('PaymentsList', { filterType: null })
                 }
-                color={COLORS.primary}
+                color={COLOR.paleSoftMint}
                 cardWidth={cardWidth}
               />
               {/* Paid/Recived Amount Card */}
@@ -118,7 +119,7 @@ const HomeScreen = ({ navigation, visible }) => {
                 onPress={() =>
                   navigation.navigate('PaymentsList', { filterType: 'paid' })
                 }
-                color={COLORS.success}
+                color={COLOR.paleSoftMint}
                 cardWidth={cardWidth}
               />
               {/* Total Due Amount Card */}
@@ -341,7 +342,7 @@ const loginChartConfig = {
 const styles = StyleSheet.create({
   homeContainer: {
     flex: 1,
-    backgroundColor: BACKGROUND_COLORS.secondary,
+    //backgroundColor: BACKGROUND_COLORS.secondary,
   },
   outerScrollView: {
     flex: 1,

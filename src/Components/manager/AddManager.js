@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 16,
     border: 'none',
-    outline: 'none',
+    //outline: 'none',
     backgroundColor: '#fff',
   },
   saveButton: {

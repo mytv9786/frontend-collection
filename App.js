@@ -10,7 +10,11 @@ export default function App() {
   return (
     <AppProviders>
       <NavigationContainer>
-        <StatusBar barStyle="dark-content" backgroundColor="#6200ee" />
+        <StatusBar
+          barStyle="dark-content"
+          backgroundColor="transparent"
+          translucent={true}
+        />
         <StackNavigation />
       </NavigationContainer>
     </AppProviders>

@@ -1,5 +1,18 @@
 import { useWindowDimensions } from 'react-native';
 
+export const COLOR = {
+  creamWhite: '#FAF6F0', // Main dashboard background sheet
+  sageMintGreen: '#CBE3DB', // Left sidebar navigation panel
+  mutedCoralPink: '#F5D6C6', // Outer frame and main background border
+  darkCharcoalBrown: '#4E3629', // Heading titles, menu names, and main typography text
+  vibrantCoralOrange: '#E78367', // Primary action buttons, play trigger, and badge markers
+  softOrangePeach: '#FAD6C3', // Main welcome user banner card background
+  paleSoftMint: '#DDF0E8', // Songs played stat card background
+  blushPink: '#FADAD1', // Favorites count stat card background
+  pastelYellow: '#FDF0CD', // Hours listened metric card background
+  softLightBlue: '#DDF2F4', // Current streak count card background
+};
+
 export const COLORSS = {
   // Brand Colors
   primary: '#0284C7',

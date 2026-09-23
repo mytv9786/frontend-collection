@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import File from 'lucide-react-native/icons/file';
+import { COLOR } from '../Constants';
 
 import {
   useWindowDimensions,
@@ -59,8 +60,6 @@ const AppAuthenticatedShell = ({
       <StatusBar barStyle="light-content" backgroundColor="#6200ee" />
 
       {/* ─── GLOBAL FIXED HEADER ─── */}
-
-      <Header visible={visible} setVisible={setVisible} logout={logout} />
 
       <View style={styles.mainBodyFrame}>
         {/* ─── GLOBAL FIXED SIDEBAR ─── */}
@@ -240,8 +239,20 @@ const AppAuthenticatedShell = ({
         </View>
 
         {/* ─── DYNAMIC CORE INJECTED SCREEN CONTENT ─── */}
-        <View style={[styles.mainScreenContent, { width: mainScreenWidth }]}>
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View
+          style={[
+            styles.mainScreenContent,
+            {
+              width: mainScreenWidth,
+            },
+          ]}
+        >
+          <Header visible={visible} setVisible={setVisible} logout={logout} />
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ flexGrow: 1 }}
+          >
             {children}
           </ScrollView>
         </View>
@@ -253,7 +264,7 @@ const AppAuthenticatedShell = ({
 // ─── STACK ROUTER ENTRY MAIN COMPONENT ───
 const StackNavigation = () => {
   const { isAuthenticated } = useContext(AuthContext);
-  console.log(isAuthenticated);
+  //console.log(isAuthenticated);
 
   // Sidebar toggling dynamic tracking states
   const [visible, setVisible] = useState(true);
@@ -387,7 +398,15 @@ const StackNavigation = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: '#FFFFFF' },
+  container: {
+    backgroundColor: COLOR.mutedCoralPink,
+    ...Platform.select({
+      web: {
+        width: '100vw',
+        height: '100vh',
+      },
+    }),
+  },
   headerContainer: {
     height: 60,
     backgroundColor: '#000000',
@@ -404,7 +423,7 @@ const styles = StyleSheet.create({
   subText: { color: '#CCCCCC', fontSize: 11, marginTop: 2 },
   mainBodyFrame: { flex: 1, flexDirection: 'row' },
   sidebar: {
-    backgroundColor: '#F8F9FA',
+    backgroundColor: COLOR.sageMintGreen,
     borderRightWidth: 1,
     borderRightColor: '#E0E0E0',
     overflow: 'hidden',
@@ -451,7 +470,7 @@ const styles = StyleSheet.create({
     marginLeft: 6,
   },
   activeText: { color: '#6200ee', fontWeight: 'bold' },
-  mainScreenContent: { flex: 1 },
+  mainScreenContent: { flex: 1, backgroundColor: COLOR.creamWhite },
 });
 
 export default StackNavigation;
