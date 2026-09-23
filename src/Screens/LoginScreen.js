@@ -47,6 +47,7 @@ const LoginScreen = ({ navigation }) => {
       if (result.success) {
         Alert.alert('Success', result.message);
         setError(result.message);
+        navigation.navigate('Home');
       } else {
         Alert.alert('Login Failure', result.message);
         setError(result.message);
