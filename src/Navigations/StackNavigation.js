@@ -252,6 +252,7 @@ const AppAuthenticatedShell = ({
 // ─── STACK ROUTER ENTRY MAIN COMPONENT ───
 const StackNavigation = () => {
   const { isAuthenticated } = useContext(AuthContext);
+  console.log(!isAuthenticated);
 
   // Sidebar toggling dynamic tracking states
   const [visible, setVisible] = useState(true);

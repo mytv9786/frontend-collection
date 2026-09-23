@@ -8,7 +8,6 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform,
-  window,
 } from 'react-native';
 import { ManagerContext } from '../../Context/ManagerContext';
 import { useInputCardWidth } from '../../Constants';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View,
   Text,
@@ -11,12 +11,15 @@ import {
 } from 'react-native';
 
 import { baseApi } from '../Services/BaseApi';
+import { AuthContext } from '../Context/AuthContext';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async () => {
     setError('');
@@ -33,21 +36,14 @@ const LoginScreen = ({ navigation }) => {
 
       setLoading(true);
       //const result = await login(email, password);
-
-      const response = await fetch(`${baseApi}/api/users/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: email, password: password }),
-      });
-
+      console.log(email, password);
+      const response = await login(email, password);
+      console.log(response);
       const result = await response.json();
 
       if (result.success) {
         Alert.alert('Success', result.message);
         setError(result.message);
-        navigation.navigate('Home');
       } else {
         Alert.alert('Login Failure', result.message);
         setError(result.message);

@@ -181,7 +181,7 @@
 // });
 
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+//import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../Screens/Home';
 import Profile from '../Screens/ProfileScreen';
@@ -191,31 +191,29 @@ const Stack = createNativeStackNavigator();
 
 export default function Navigation() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="LoginScreen"
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: '#6200ee',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}
-      >
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ title: '🏠 Home Dashboard' }}
-        />
-        <Stack.Screen
-          name="Profile"
-          component={Profile}
-          options={{ title: '👤 My Profile' }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+      initialRouteName="LoginScreen"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#6200ee',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ title: '🏠 Home Dashboard' }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ title: '👤 My Profile' }}
+      />
+    </Stack.Navigator>
   );
 }
