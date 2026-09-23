@@ -1,11 +1,14 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+
+import StackNavigationss from './src/Navigations/StackNavigationss';
+//import LoginScreen from './src/Screens/LoginScreen';
 
 const App = () => {
   return (
-    <View>
-      <Text>App app</Text>
-    </View>
+    <NavigationContainer>
+      <StackNavigationss />
+    </NavigationContainer>
   );
 };
 
