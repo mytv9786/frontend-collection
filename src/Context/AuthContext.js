@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import { baseApi } from '../Services/BaseApi';
-import Storage from '../UI/Storage';
+//import Storage from '../UI/Storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext();
 
@@ -44,7 +45,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const bootstrapAsync = async () => {
       try {
-        const token = await Storage.getItem('authToken');
+        const token = await AsyncStorage.getItem('authToken');
 
         // టోకెన్ నిజంగా ఉంటేనే (null/undefined స్ట్రింగ్స్ కాకుండా ఉంటేనే) వెరిఫై చేస్తుంది
         if (token && token !== 'null' && token !== 'undefined') {
@@ -70,12 +71,12 @@ export const AuthContextProvider = ({ children }) => {
         }
 
         // టోకెన్ లేకపోయినా లేదా ఇన్వాలిడ్ అయినా స్టోరేజ్ క్లియర్ చేసి లాగౌట్ చేస్తుంది
-        await Storage.removeItem('authToken');
+        await AsyncStorage.removeItem('authToken');
         dispatch({ type: 'LOGOUT' });
       } catch (e) {
         console.error('Auth bootstrap error:', e);
         try {
-          await Storage.removeItem('authToken');
+          await AsyncStorage.removeItem('authToken');
         } catch (err) {}
         dispatch({ type: 'LOGOUT' });
       }
@@ -103,7 +104,7 @@ export const AuthContextProvider = ({ children }) => {
           result.user && typeof result.user === 'object' ? result.user : {};
 
         if (token) {
-          await Storage.setItem('authToken', token);
+          await AsyncStorage.setItem('authToken', token);
           dispatch({
             type: 'LOGIN',
             payload: { token, user },
@@ -138,7 +139,7 @@ export const AuthContextProvider = ({ children }) => {
   // 4. లాగౌట్ ఫంక్షన్
   const logout = async () => {
     try {
-      await Storage.removeItem('authToken');
+      await AsyncStorage.removeItem('authToken');
     } catch (e) {
       console.error('Logout storage error:', e);
     }

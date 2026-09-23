@@ -9,7 +9,6 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  SafeAreaView,
   StatusBar,
   Platform,
 } from 'react-native';
@@ -56,7 +55,7 @@ const AppAuthenticatedShell = ({
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#6200ee" />
 
       {/* ─── GLOBAL FIXED HEADER ─── */}
@@ -242,17 +241,19 @@ const AppAuthenticatedShell = ({
 
         {/* ─── DYNAMIC CORE INJECTED SCREEN CONTENT ─── */}
         <View style={[styles.mainScreenContent, { width: mainScreenWidth }]}>
-          {children}
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            {children}
+          </ScrollView>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 // ─── STACK ROUTER ENTRY MAIN COMPONENT ───
 const StackNavigation = () => {
   const { isAuthenticated } = useContext(AuthContext);
-  console.log(!isAuthenticated);
+  console.log(isAuthenticated);
 
   // Sidebar toggling dynamic tracking states
   const [visible, setVisible] = useState(true);
@@ -386,7 +387,7 @@ const StackNavigation = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
+  container: { backgroundColor: '#FFFFFF' },
   headerContainer: {
     height: 60,
     backgroundColor: '#000000',

@@ -32,6 +32,8 @@ const HomeScreen = ({ navigation, visible }) => {
   const [page, setPage] = useState(0);
   const itemsPerPage = 4;
 
+  console.log('testing Home');
+
   const { payments } = useContext(PaymentContext);
   const { width } = useWindowDimensions();
 
