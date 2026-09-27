@@ -35,10 +35,6 @@ const Dashboard = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>My Profile</Text>
-      </View>
-
       <ScrollView contentContainerStyle={styles.content}>
         {/* User Card */}
         <View style={styles.userCard}>

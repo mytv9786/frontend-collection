@@ -21,6 +21,7 @@ import {
   SPACING,
   WIDTH,
 } from '../Constants';
+import Pagination from '../UI/Pagination';
 
 const data = [
   { month: 'Jan', revenue: 52 },
@@ -31,9 +32,8 @@ const data = [
 
 const HomeScreen = ({ navigation, visible }) => {
   const [page, setPage] = useState(0);
-  const itemsPerPage = 4;
-
-  console.log('testing Home');
+  const [itemsPerPage, setItemPerPage] = useState(3);
+  const itemsPerPages = 4;
 
   const { payments } = useContext(PaymentContext);
   const { width } = useWindowDimensions();
@@ -45,6 +45,7 @@ const HomeScreen = ({ navigation, visible }) => {
     recentPay => recentPay.paidAmount !== '0.00' && recentPay.paidAmount,
   );
 
+  //console.log(payments);
   // How many payments show in per page in screen
   const historyList = recentPayments || [];
   const from = page * itemsPerPage;
@@ -109,7 +110,7 @@ const HomeScreen = ({ navigation, visible }) => {
                 onPress={() =>
                   navigation.navigate('PaymentsList', { filterType: null })
                 }
-                color={COLOR.paleSoftMint}
+                color={COLOR.accentGreen}
                 cardWidth={cardWidth}
               />
               {/* Paid/Recived Amount Card */}
@@ -119,7 +120,7 @@ const HomeScreen = ({ navigation, visible }) => {
                 onPress={() =>
                   navigation.navigate('PaymentsList', { filterType: 'paid' })
                 }
-                color={COLOR.paleSoftMint}
+                color={COLOR.accentOrange}
                 cardWidth={cardWidth}
               />
               {/* Total Due Amount Card */}
@@ -129,17 +130,17 @@ const HomeScreen = ({ navigation, visible }) => {
                 onPress={() =>
                   navigation.navigate('PaymentsList', { filterType: 'due' })
                 }
-                color={COLORS.warning}
+                color={COLOR.accentYellow}
                 cardWidth={cardWidth}
               />
             </View>
-            {/* Recent Payments Title */}
+
+            {/* Chat List Contaienr */}
 
             <View style={styles.chartContainer}>
               <View style={[styles.chartCard, { width: cardWidth }]}>
                 <Text style={styles.chartTitle}>
-                  Performance Trends {width} (chart){chartWidthPixels}(test){' '}
-                  {cardWidth}
+                  Performance Trends PieChart
                 </Text>
                 <PieChart
                   data={paymentPieChartData} // 💡 ఇక్కడ మన కొత్త అమౌంట్స్ డేటా ఇచ్చాం
@@ -185,9 +186,17 @@ const HomeScreen = ({ navigation, visible }) => {
                 />
               </View>
             </View>
-            <Text style={styles.paymentTitle}>Recent Payment History</Text>
+
             {/* Recent Paymnets List  */}
-            <View style={[styles.cardsContainer]}>
+            <View style={[styles.paymentsContainer]}>
+              <Text style={styles.paymentTitle}>Recent Payment History</Text>
+              <Pagination
+                listItems={recentPayments}
+                page={page}
+                setPage={setPage}
+                itemsPerPage={itemsPerPage}
+                setItemPerPage={setItemPerPage}
+              />
               <View style={styles.tableWrapperCard}>
                 {/* 1. కాలమ్స్ ఎక్కువ ఉన్నాయి కాబట్టి హారిజాంటల్ స్క్రోల్ లోపల ప్యూర్ వ్యూస్ తో టేబుల్ బిల్డ్ చేసాం */}
                 <ScrollView
@@ -283,38 +292,12 @@ const HomeScreen = ({ navigation, visible }) => {
 
                 {/* 🔢 2. ప్యూర్ క్రాస్-ప్లాట్‌ఫార్మ్ పేజినేషన్ (Custom Pagination) */}
 
-                <View style={styles.paginationContainer}>
-                  <Text style={styles.paginationLabel}>
-                    {from + 1}-{Math.min(to, historyList.length)} of{' '}
-                    {historyList.length}
-                  </Text>
-
-                  <View style={styles.paginationActions}>
-                    {/* వెనక్కి వెళ్లే బటన్ */}
-                    <TouchableOpacity
-                      style={[
-                        styles.pageButton,
-                        page === 0 && styles.disabledButton,
-                      ]}
-                      disabled={page === 0}
-                      onPress={() => setPage(page - 1)}
-                    >
-                      <Text style={styles.pageButtonText}>◀</Text>
-                    </TouchableOpacity>
-
-                    {/* ముందుకు వెళ్లే బటన్ */}
-                    <TouchableOpacity
-                      style={[
-                        styles.pageButton,
-                        to >= historyList.length && styles.disabledButton,
-                      ]}
-                      disabled={to >= historyList.length}
-                      onPress={() => setPage(page + 1)}
-                    >
-                      <Text style={styles.pageButtonText}>▶</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
+                <Pagination
+                  listItems={recentPayments}
+                  page={page}
+                  setPage={setPage}
+                  itemsPerPage={itemsPerPage}
+                />
               </View>
             </View>
           </View>
@@ -360,21 +343,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cardsContainer: {
-    alignItems: 'center',
-    width: WIDTH.screen,
-    gap: 20,
     padding: 10,
-    ...Platform.select({
-      web: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        //flexWrap: 'wrap',
-      },
-      android: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-      },
-    }),
+    borderRadius: 12,
+    gap: 15,
+    elevation: 2,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '100%',
+    marginBottom: 15,
   },
   paymentTitle: {
     fontSize: 24,
@@ -386,8 +362,6 @@ const styles = StyleSheet.create({
   },
 
   chartContainer: {
-    //position: 'relative',
-    backgroundColor: '#cecece',
     padding: 10,
     borderRadius: 12,
     gap: 15,
@@ -410,6 +384,22 @@ const styles = StyleSheet.create({
     //minHeight: 280,
     flexGrow: 1,
     overflow: 'hidden',
+    boxShadow:
+      '4px 4px 12px 0px rgba(101, 84, 80, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
+  },
+  chartCards: {
+    paddingTop: 10,
+    borderRadius: 12,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    //minHeight: 280,
+    flexGrow: 1,
+    overflow: 'hidden',
+    boxShadow:
+      '4px 4px 12px 0px rgba(101, 84, 80, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
   },
   chartTitle: {
     fontSize: 15,
@@ -425,16 +415,25 @@ const styles = StyleSheet.create({
   },
 
   //dabale data
+
+  paymentsContainer: {
+    //alignItems: 'center',
+    width: WIDTH.screen,
+    //gap: 20,
+    paddingHorizontal: 10,
+    marginTop: 40,
+    borderRadius: 12,
+  },
   tableWrapperCard: {
-    backgroundColor: '#ffffff',
     borderRadius: 12,
     borderWidth: 1,
     borderColor: '#E2E8F0',
     overflow: 'hidden',
-    marginTop: 20,
     width: '100%',
     //maxWidth: 1200,
     alignSelf: 'center',
+    boxShadow:
+      '4px 4px 12px 0px rgba(101, 84, 80, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
   },
   scrollViewContainer: { flexGrow: 1 },
   pureTableContainer: {
@@ -476,41 +475,6 @@ const styles = StyleSheet.create({
   },
   bgColor: {
     backgroundColor: '#e8ebea',
-  },
-  // పేజినేషన్ స్టైల్స్
-  paginationContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    padding: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#E2E8F0',
-    backgroundColor: '#F8FAFC',
-    gap: 20,
-  },
-  paginationLabel: {
-    fontSize: 13,
-    color: '#555',
-  },
-  paginationActions: {
-    flexDirection: 'row',
-    gap: 10,
-  },
-  pageButton: {
-    backgroundColor: '#007AFF',
-    width: 36,
-    height: 36,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  pageButtonText: {
-    color: '#ffffff',
-    fontSize: 12,
-  },
-  disabledButton: {
-    backgroundColor: '#CBD5E1',
-    opacity: 0.6,
   },
 });
 

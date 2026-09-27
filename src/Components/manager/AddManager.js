@@ -169,13 +169,19 @@ const AddManager = ({ navigation, visible }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#e6e8e9',
-    padding: 8,
+    //flex: 1,
+    //backgroundColor: '#e6e8e9',
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    marginHorizontal: 10,
+    marginVertical: 20,
+    boxShadow:
+      '4px 4px 12px 0px rgba(77, 38, 29, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
+    borderRadius: 20,
   },
   scrollContainer: {
     //flexDirection: Platform.OS === 'web' ? 'row' : 'column',
-    backgroundColor: '#ffffff',
+    //backgroundColor: '#ffffff',
     padding: 10,
     //maxWidth: Platform.OS === 'web' ? 600 : '100%',
     //alignSelf: Platform.OS === 'web' ? 'center' : 'auto',

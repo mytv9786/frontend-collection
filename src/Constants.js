@@ -1,16 +1,47 @@
 import { useWindowDimensions } from 'react-native';
 
 export const COLOR = {
-  creamWhite: '#FAF6F0', // Main dashboard background sheet
-  sageMintGreen: '#CBE3DB', // Left sidebar navigation panel
-  mutedCoralPink: '#F5D6C6', // Outer frame and main background border
-  darkCharcoalBrown: '#4E3629', // Heading titles, menu names, and main typography text
-  vibrantCoralOrange: '#E78367', // Primary action buttons, play trigger, and badge markers
-  softOrangePeach: '#FAD6C3', // Main welcome user banner card background
-  paleSoftMint: '#DDF0E8', // Songs played stat card background
-  blushPink: '#FADAD1', // Favorites count stat card background
-  pastelYellow: '#FDF0CD', // Hours listened metric card background
-  softLightBlue: '#DDF2F4', // Current streak count card background
+  // 🔴 Core Backgrounds (Corrected)
+  mainBackground: '#F3EDE2', // The actual warm cream canvas background of the UI
+  outerFrame: '#ECD6C7', // The soft pastel peach surrounding the interface
+
+  // ⬜ Component Bases
+  cardBase: '#FAF6F0', // The brighter white/cream for individual pop-out cards
+  textDark: '#413534', // Soft dark charcoal brown for main text/headings
+  textMuted: '#968581', // Muted taupe brown for labels and subtext
+
+  // 🍏 Sidebar & Highlight Accents
+  sidebarBackground: '#C8DDD9', // Pastel mint/teal sidebar background
+  accentOrange: '#FDBDA8', // Soft pastel coral (Favorites, Go Premium widget)
+  accentYellow: '#FDE4AB', // Soft pastel yellow (Hours Listened card)
+  accentGreen: '#CBE0CD', // Soft pastel green (Songs Played card)
+};
+
+export const BAR_CHART_COLORS = {
+  yellow: '#FEDCA9', // Monday / Saturday
+  orange: '#FCAE9B', // Tuesday
+  coralRed: '#F5968E', // Wednesday (Highest bar)
+  mintGreen: '#B4DCC4', // Thursday / Sunday
+  skyBlue: '#A9CDE9', // Friday
+
+  // Background element
+  axisLines: '#EADBCC', // The soft horizontal grid lines behind the bars
+};
+
+export const DONUT_CHART_COLORS = {
+  pop: '#FFAE98', // Large coral pink slice (45%)
+  lofi: '#FEDCA7', // Pastel yellow-orange slice (25%)
+  hipHop: '#B4DDC4', // Soft mint green slice (15%)
+  rock: '#A4CBE8', // Soft sky blue slice (10%)
+  other: '#D3CADB', // Soft lavender/gray slice (5%)
+};
+
+export const TEST_COLORS = {
+  oxfordBule: '#192338',
+  spaceCadet: '#1E2E4F',
+  yinminBule: '#31487A',
+  jordyBule: '#8FB3E2',
+  lavender: '#D9E1F1',
 };
 
 export const COLORSS = {

@@ -159,11 +159,11 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
-    backgroundColor: COLOR.mutedCoralPink,
+    backgroundColor: COLOR.mainBackground,
     height: Platform.OS === 'web' ? '100%' : undefined,
   },
   webContainer: {
-    backgroundColor: COLOR.mutedCoralPink,
+    backgroundColor: COLOR.mainBackground,
     height: '100vh',
   },
   container: {
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   cardShell: {
     width: '100%',
     maxWidth: 420,
-    backgroundColor: COLOR.creamWhite,
+    backgroundColor: '#FFF',
     borderRadius: 35,
     padding: 35,
     alignItems: 'center',
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     height: 52,
-    backgroundColor: '#F3EDE4',
+    backgroundColor: '#FFF', //#F3EDE4
     borderRadius: 16,
     paddingHorizontal: 20,
     marginBottom: 18,
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     color: COLOR.darkCharcoalBrown,
     ...Platform.select({
       web: {
-        boxShadow: 'inset 2px 2px 5px rgba(78,54,41,0.06)',
+        boxShadow: 'inset 8px 8px 5px rgba(189, 74, 12, 0.06)',
         // 🟢 క్రేష్ అయ్యే 'outlineStyle' లైన్ ఇక్కడి నుండి పూర్తిగా తీసేసాను
       },
     }),
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
   button: {
     width: '100%',
     height: 54,
-    backgroundColor: COLOR.vibrantCoralOrange,
+    backgroundColor: COLOR.accentGreen,
     borderRadius: 18,
     justifyContent: 'center',
     alignItems: 'center',

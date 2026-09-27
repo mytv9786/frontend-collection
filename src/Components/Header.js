@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { COLOR } from '../Constants';
-//import { SafeAreaView } from 'react-native-safe-area-context';
+import { CircleUserRound } from 'lucide-react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const Header = ({ visible, setVisible, logout }) => {
-  //const [visible, setVisible] = useState(false);
+const Header = ({ visible, setVisible, currentRoute, logout }) => {
+  const navigation = useNavigation();
 
   return (
     <View>
@@ -17,14 +18,14 @@ const Header = ({ visible, setVisible, logout }) => {
           <Text style={styles.buttonText}>☰</Text>
         </TouchableOpacity>
         <View style={styles.titleArea}>
-          <Text style={styles.mainTitle}>{'Excell Media Pvt Ltd'}</Text>
-          <Text style={styles.subText}>Collection Report 2026-27</Text>
+          <Text style={styles.mainTitle}>{currentRoute}</Text>
         </View>
+
         <TouchableOpacity
-          style={[styles.toggleButton, styles.bgColor]}
-          onPress={() => logout()}
+          style={[styles.toggleButton]}
+          onPress={() => navigation.navigate('Profile')}
         >
-          <Text style={styles.logoutIcon}>➜</Text>
+          <CircleUserRound size={24} />
         </TouchableOpacity>
       </View>
       <View style={styles.horizontalLine} />
@@ -41,8 +42,9 @@ const styles = StyleSheet.create({
     justifyContext: 'space-between',
     paddingHorizontal: 15,
     justifyContent: 'space-between',
+    marginBottom: 5,
   },
-  toggleButton: { padding: 10, borderRadius: 5 },
+  toggleButton: { padding: 10, borderRadius: 5, alignItems: 'center' },
   buttonText: {
     color: COLOR.darkCharcoalBrown,
     fontSize: 20,

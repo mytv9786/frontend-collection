@@ -113,6 +113,17 @@ const CustomersList = ({ navigation, visible }) => {
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
+        <TouchableOpacity style={styles.filterBtn}>
+          <Text style={styles.filterText}>Filter</Text>
+        </TouchableOpacity>
+        {user?.role_name === 'superadmin' && (
+          <TouchableOpacity
+            style={styles.addBtn}
+            onPress={() => navigation.navigate('AddManager')}
+          >
+            <Text style={styles.btnText}> Add Manager</Text>
+          </TouchableOpacity>
+        )}
       </View>
 
       {/* 
@@ -167,20 +178,25 @@ const CustomersList = ({ navigation, visible }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e1e3e7',
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    boxShadow:
+      '4px 4px 12px 0px rgba(101, 84, 80, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
+    borderRadius: 20,
+    marginHorizontal: 10,
+    marginVertical: 20,
   },
-  header: {
-    //backgroundColor: '#fff',
-    padding: 15,
-    alignItems: 'center',
-  },
+  header: {},
   headerTitle: {
-    color: '#000',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
+    marginBottom: 8,
+    color: '#2c3e50',
   },
   searchContainer: {
-    padding: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   searchInput: {
     backgroundColor: '#fff',
@@ -189,16 +205,36 @@ const styles = StyleSheet.create({
     height: 45,
     borderWidth: 1,
     borderColor: '#ddd',
+    width: '80%',
     ...Platform.select({
       web: {
         outlineStyle: 'none',
       },
     }),
   },
+  filterBtn: {
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderColor: '#f0f0f0',
+  },
+  filterText: {
+    fontSize: 14,
+  },
+  addBtn: {
+    backgroundColor: '#C8DDD9',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 10,
+  },
+  btnText: {
+    fontSize: 14,
+    color: '#000',
+    fontWeight: 'bold',
+  },
 
   // 3. UNIFIED ROW LAYOUT STYLES FOR TRUE GRID FLEX GROW
   listContainer: {
-    padding: 12,
+    paddingVertical: 12,
     paddingBottom: 100,
     width: '100%',
     ...Platform.select({
@@ -211,7 +247,7 @@ const styles = StyleSheet.create({
     }),
   },
   listContent: {
-    paddingHorizontal: 6,
+    marginRight: 8,
     marginBottom: 15,
     boxSizing: 'border-box',
     display: 'flex',

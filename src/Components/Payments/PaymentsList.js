@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import { PaymentContext } from '../../Context/PaymentContext';
 //import { SafeAreaView } from 'react-native-safe-area-context';
 import { CustomerContext } from '../../Context/CustomerContext';
+import Pagination from '../../UI/Pagination';
 
 const PaymentsList = ({ route, visible }) => {
   // Get the filter type (e.g., 'paid') from navigation
@@ -20,8 +21,9 @@ const PaymentsList = ({ route, visible }) => {
   const { payments } = useContext(PaymentContext);
   const { filterType } = route.params || {};
   const [page, setPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  const itemsPerPage = 10;
+  //const itemsPerPage = 10;
 
   const paymentList = payments || [];
   const from = page * itemsPerPage;
@@ -71,10 +73,21 @@ const PaymentsList = ({ route, visible }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>
           {filterType === 'paid' ? 'Paid Transactions' : 'All Transactions'}
         </Text>
+        <View style={styles.filterAndAddBtn}>
+          <TouchableOpacity style={styles.filterBtn}>
+            <Text style={styles.filterText}>Filter</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.addBtn}
+            onPress={() => navigation.navigate('AddManager')}
+          >
+            <Text style={styles.btnText}> Add Manager</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View style={[styles.tableWrapperCard]}>
@@ -158,35 +171,13 @@ const PaymentsList = ({ route, visible }) => {
             ))}
           </View>
         </ScrollView>
-        <View style={styles.paginationContainer}>
-          <Text style={styles.paginationLabel}>
-            {from + 1}-{Math.min(to, filteredData.length)} of{' '}
-            {filteredData.length}
-          </Text>
-
-          <View style={styles.paginationActions}>
-            {/* వెనక్కి వెళ్లే బటన్ */}
-            <TouchableOpacity
-              style={[styles.pageButton, page === 0 && styles.disabledButton]}
-              disabled={page === 0}
-              onPress={() => setPage(page - 1)}
-            >
-              <Text style={styles.pageButtonText}>◀</Text>
-            </TouchableOpacity>
-
-            {/* ముందుకు వెళ్లే బటన్ */}
-            <TouchableOpacity
-              style={[
-                styles.pageButton,
-                to >= filteredData.length && styles.disabledButton,
-              ]}
-              disabled={to >= filteredData.length}
-              onPress={() => setPage(page + 1)}
-            >
-              <Text style={styles.pageButtonText}>▶</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        <Pagination
+          listItems={filteredData}
+          page={page}
+          setPage={setPage}
+          itemsPerPage={itemsPerPage}
+          setItemsPerPage={setItemsPerPage}
+        />
       </View>
 
       <TouchableOpacity
@@ -201,10 +192,54 @@ const PaymentsList = ({ route, visible }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#e1e3e7' },
-  header: { padding: 15, alignItems: 'center' },
-  headerTitle: { color: '#000', fontSize: 18, fontWeight: 'bold' },
+  container: { flex: 1, paddingHorizontal: 12 },
 
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 12,
+  },
+  headerTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color: '#2c3e50',
+  },
+  filterAndAddBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 20,
+  },
+  searchInput: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    width: '80%',
+  },
+  filterBtn: {
+    paddingHorizontal: 24,
+    paddingVertical: 6,
+    borderWidth: 1,
+    borderColor: '#000',
+  },
+  filterText: {
+    fontSize: 14,
+  },
+  addBtn: {
+    backgroundColor: '#C8DDD9',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 10,
+  },
+  btnText: {
+    fontSize: 14,
+    color: '#000',
+    fontWeight: 'bold',
+  },
   title: { fontSize: 20, fontWeight: 'bold', marginBottom: 15, color: '#333' },
   historyItem: {
     backgroundColor: '#fff',
@@ -250,10 +285,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E2E8F0',
     overflow: 'hidden',
-    marginTop: 20,
+    //marginTop: 20,
     width: '100%',
     //maxWidth: 1200,
     alignSelf: 'center',
+    boxShadow:
+      '4px 4px 12px 0px rgba(101, 84, 80, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
   },
   pureTableContainer: {
     //flex: 1,
@@ -292,41 +329,7 @@ const styles = StyleSheet.create({
   columnWidth: {
     width: 120, // 💡 ప్రతీ కాలమ్ సమానంగా 120px వెడల్పుతో నీట్ గా అలైన్ అవుతుంది
   },
-  // పేజినేషన్ స్టైల్స్
-  paginationContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    padding: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#E2E8F0',
-    backgroundColor: '#F8FAFC',
-    gap: 20,
-  },
-  paginationLabel: {
-    fontSize: 13,
-    color: '#555',
-  },
-  paginationActions: {
-    flexDirection: 'row',
-    gap: 10,
-  },
-  pageButton: {
-    backgroundColor: '#007AFF',
-    width: 36,
-    height: 36,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  pageButtonText: {
-    color: '#ffffff',
-    fontSize: 12,
-  },
-  disabledButton: {
-    backgroundColor: '#CBD5E1',
-    opacity: 0.6,
-  },
+
   tableHeaders: {
     backgroundColor: '#eeeeee',
     borderTopLeftRadius: 8,

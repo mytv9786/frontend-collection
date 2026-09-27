@@ -17,7 +17,7 @@ const InfoRow = ({ label, value, isBold = false }) => (
   </View>
 );
 
-const ManagerDetails = ({ route }) => {
+const ManagerDetails = ({ route, navigation }) => {
   const { item } = route?.params;
   const { customers } = useContext(CustomerContext);
   const [page, setPage] = useState(0);
@@ -32,7 +32,10 @@ const ManagerDetails = ({ route }) => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.Back()}
+        >
           <Text style={styles.backArrow}>{'<'}</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Manager Details</Text>
@@ -51,13 +54,17 @@ const ManagerDetails = ({ route }) => {
         <View style={styles.cardHeader}>
           <Text style={styles.cardHeaderText}>Assigned Customers</Text>
         </View>
-        <View style={{ flex: 1 }}>
+        <View
+          style={{
+            flex: 1,
+          }}
+        >
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ flex: 1 }}
+            contentContainerStyle={{ flex: 1, paddingHorizontal: 10 }}
           >
-            <View style={[styles.card, { width: '100%' }]}>
+            <View style={[styles.card, { width: '99%' }]}>
               <View style={styles.tableHeader}>
                 <View style={[styles.columnHeader, styles.columnWidth]}>
                   <Text style={styles.headerText}>CBP No</Text>
@@ -106,7 +113,16 @@ const ManagerDetails = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#d8dadb' },
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    marginHorizontal: 10,
+    marginVertical: 20,
+    boxShadow:
+      '4px 4px 12px 0px rgba(77, 38, 29, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
+    borderRadius: 20,
+  },
   header: {
     padding: 15,
     flexDirection: 'row',
@@ -118,16 +134,29 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginRight: 15,
   },
-  headerTitle: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
-  content: { padding: 15 },
+  headerTitle: { color: '#000', fontSize: 18, fontWeight: 'bold' },
+  content: {
+    //paddingHorizontal: 20,
+    //paddingVertical: 20,
+    //marginHorizontal: 10,
+    //marginVertical: 20,
+    //boxShadow:
+    // '4px 4px 12px 0px rgba(77, 38, 29, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
+    //borderRadius: 20,
+  },
   card: {
     backgroundColor: '#fff',
-    borderRadius: 10,
-    marginBottom: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    marginHorizontal: 10,
+    marginVertical: 20,
     overflow: 'hidden',
     elevation: 2,
     borderWidth: 1,
     borderColor: '#d1d8e0',
+    boxShadow:
+      '4px 4px 12px 0px rgba(77, 38, 29, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
+    borderRadius: 20,
   },
   infoRow: {
     flexDirection: 'row',
