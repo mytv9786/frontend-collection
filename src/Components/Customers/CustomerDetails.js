@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Platform } from 'react';
 import {
   StyleSheet,
   View,
@@ -256,13 +256,14 @@ const CustomerDetails = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 0,
     paddingVertical: 20,
-    marginHorizontal: 10,
+    marginHorizontal: 6,
     marginVertical: 20,
     boxShadow:
       '4px 4px 12px 0px rgba(77, 38, 29, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
     borderRadius: 20,
+    marginBottom: 180,
   },
   header: { paddingHorizontal: 15, paddingTop: 15 },
   headerText: { color: '#000', fontSize: 18, fontWeight: 'bold' },

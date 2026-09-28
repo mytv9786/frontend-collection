@@ -205,6 +205,7 @@ const styles = StyleSheet.create({
     boxShadow:
       '4px 4px 12px 0px rgba(77, 38, 29, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
     borderRadius: 20,
+    marginBottom: Platform.OS === 'web' ? 180 : 120,
   },
   scrollContainer: {
     //flexDirection: Platform.OS === 'web' ? 'row' : 'column',
@@ -212,6 +213,7 @@ const styles = StyleSheet.create({
     padding: 10,
     //maxWidth: Platform.OS === 'web' ? 600 : '100%',
     //alignSelf: Platform.OS === 'web' ? 'center' : 'auto',
+    marginBottom: Platform.OS === 'web' ? 40 : 20,
   },
   scrollContent: {
     width: '100%',

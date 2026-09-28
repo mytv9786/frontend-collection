@@ -185,6 +185,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginHorizontal: 10,
     marginVertical: 20,
+    marginBottom: Platform.OS === 'web' ? 180 : 120,
   },
   header: {},
   headerTitle: {
@@ -244,6 +245,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start', // కార్డ్‌లు లెఫ్ట్ నుండి లైన్ గా అలైన్ అవుతాయి
         alignItems: 'stretch', // ఒకే లైన్ లో ఉన్న కార్డ్స్ సమానమైన హైట్ తీసుకుంటాయి
       },
+      marginBottom: Platform.OS === 'web' ? 40 : 20,
     }),
   },
   listContent: {

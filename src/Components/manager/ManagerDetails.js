@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, Platform } from 'react';
 import {
   StyleSheet,
   View,
@@ -62,48 +62,39 @@ const ManagerDetails = ({ route, navigation }) => {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ flex: 1, paddingHorizontal: 10 }}
+            contentContainerStyle={styles.scrollContainer}
           >
-            <View style={[styles.card, { width: '99%' }]}>
-              <View style={styles.tableHeader}>
-                <View style={[styles.columnHeader, styles.columnWidth]}>
-                  <Text style={styles.headerText}>CBP No</Text>
-                </View>
-                <View style={[styles.columnHeader, styles.columnWidth]}>
-                  <Text style={styles.headerText}>Customer Name</Text>
-                </View>
-                <View style={[styles.columnHeader, styles.columnWidth]}>
-                  <Text style={styles.headerText}>mobile</Text>
-                </View>
+            <View style={[styles.historyContainer]}>
+              <View style={[styles.tableHeader]}>
+                <Text style={[styles.headerCell, styles.columnWidth]}>
+                  Customer Name
+                </Text>
+                <Text style={[styles.headerCell, styles.columnWidth]}>
+                  CBP No
+                </Text>
+                <Text style={[styles.headerCell, styles.columnWidth]}>
+                  Mobile
+                </Text>
               </View>
 
               {historyList.slice(from, to).map((item, index) => (
                 <View
                   key={index}
-                  style={[
-                    styles.tableRow,
-                    index % 2 !== 0 && { backgroundColor: '#e8ebea' },
-                  ]}
+                  style={[styles.tableRow, index % 2 !== 0 && styles.bgColor]}
                 >
-                  <View style={styles.columnWidth}>
-                    <Text style={[styles.cellName]}>{item.cbpNo}</Text>
-                  </View>
                   <View style={styles.columnWidth}>
                     <Text style={[styles.cellName]}>{item.cbpName}</Text>
                   </View>
+
                   <View style={styles.columnWidth}>
-                    <Text style={[styles.cellName]}>{item.mobile}</Text>
+                    <Text style={styles.cellName}>{item.cbpNo}</Text>
+                  </View>
+
+                  <View style={styles.columnWidth}>
+                    <Text style={styles.cellName}>{item.mobile}</Text>
                   </View>
                 </View>
               ))}
-              <View
-                page={page}
-                numberOfPages={
-                  Math.ceil(historyList.length / itemsPerPage) || 1
-                }
-                onPageChange={setPage}
-                label={`${from + 1}-${to} of ${historyList.length}`}
-              />
             </View>
           </ScrollView>
         </View>
@@ -115,13 +106,14 @@ const ManagerDetails = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 0,
     paddingVertical: 20,
-    marginHorizontal: 10,
+    marginHorizontal: 6,
     marginVertical: 20,
     boxShadow:
       '4px 4px 12px 0px rgba(77, 38, 29, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
     borderRadius: 20,
+    marginBottom: 180,
   },
   header: {
     padding: 15,
@@ -220,6 +212,7 @@ const styles = StyleSheet.create({
     color: '#333',
     fontWeight: '500',
   },
+  bgColor: { backgroundColor: '#e8ebea' },
 });
 
 export default ManagerDetails;

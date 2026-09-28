@@ -332,7 +332,9 @@ const styles = StyleSheet.create({
   },
   // 💡 3. లోపల ఉన్న కంటెంట్ కి కింద స్పేస్ (Padding) ఇవ్వడానికి ఇది వాడతాం
   scrollContentContainer: {
-    paddingBottom: SPACING.massive,
+    //paddingBottom: SPACING.massive,
+    paddingBottom: Platform.OS === 'web' ? 80 : 40,
+    flexGrow: 1,
   },
   mainContent: {
     flex: 1,
@@ -434,6 +436,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     boxShadow:
       '4px 4px 12px 0px rgba(101, 84, 80, 0.45), -4px -4px 12px 0px rgba(101, 84, 80, 0.45)',
+    marginBottom: Platform.OS === 'web' ? 40 : 20,
   },
   scrollViewContainer: { flexGrow: 1 },
   pureTableContainer: {

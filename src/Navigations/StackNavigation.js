@@ -79,225 +79,247 @@ const AppAuthenticatedShell = ({
             isMobile && visible && styles.mobileSidebarOverlay,
           ]}
         >
-          {visible && (
-            <ScrollView contentContainerStyle={styles.sidebarContent}>
-              <View>
-                <View style={{ alignItems: 'center', marginBottom: 30 }}>
-                  <CircleUserRound size={80} />
+          <ScrollView contentContainerStyle={styles.sidebarContent}>
+            <View>
+              {isMobile && visible && (
+                <TouchableOpacity
+                  style={styles.toggleButtonMenu}
+                  onPress={() => setVisible(!visible)}
+                >
+                  <Text style={styles.toggleButtonText}>☰</Text>
+                </TouchableOpacity>
+              )}
+              <View style={styles.sidebarProfile}>
+                <CircleUserRound size={visible ? 80 : 24} />
+                {visible && (
                   <Text style={styles.sidebarTitle}>Welcome Saiteja</Text>
-                </View>
-
-                <TouchableOpacity
-                  onPress={() => handleNavigation('HomeScreen')}
-                  style={[
-                    styles.menuItem,
-                    currentRoute === 'HomeScreen' && styles.activeMenuItem,
-                  ]}
-                >
-                  <View style={styles.menuIcon}>
-                    <House size={24} />
-                    <Text style={styles.menuText}>Dashboard</Text>
-                  </View>
-                </TouchableOpacity>
-
-                {/* Managers Submenu Dropdown */}
-                <TouchableOpacity
-                  onPress={() =>
-                    setPreferencesOpen(
-                      preferencesOpen === 'manager' ? '' : 'manager',
-                    )
-                  }
-                  style={styles.menuItem}
-                >
-                  <View style={styles.menuIcon}>
-                    <Users size={24} />
-                    <Text style={styles.menuText}>Managers Panel</Text>
-                  </View>
-                  <Text style={styles.arrowIcon}>
-                    {preferencesOpen === 'manager' ? '▲' : '▼'}
-                  </Text>
-                </TouchableOpacity>
-                {preferencesOpen === 'manager' && (
-                  <View style={styles.dropdownContainer}>
-                    {user?.role_name === 'superadmin' && (
-                      <TouchableOpacity
-                        style={styles.dropdownItem}
-                        onPress={() => handleNavigation('AddManager')}
-                      >
-                        <View style={styles.menuIcon}>
-                          <File size={20} />
-                          <Text
-                            style={[
-                              styles.dropdownItemText,
-                              currentRoute === 'AddManager' &&
-                                styles.activeText,
-                            ]}
-                          >
-                            Add Manager
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    )}
-                    <TouchableOpacity
-                      style={styles.dropdownItem}
-                      onPress={() => handleNavigation('Manager')}
-                    >
-                      <View style={styles.menuIcon}>
-                        <File size={20} />
-                        <Text
-                          style={[
-                            styles.dropdownItemText,
-                            currentRoute === 'Manager' && styles.activeText,
-                          ]}
-                        >
-                          Manager
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.dropdownItem}
-                      onPress={() => handleNavigation('ManagersList')}
-                    >
-                      <View style={styles.menuIcon}>
-                        <File size={20} />
-                        <Text
-                          style={[
-                            styles.dropdownItemText,
-                            currentRoute === 'ManagersList' &&
-                              styles.activeText,
-                          ]}
-                        >
-                          Managers List
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                )}
-
-                {/* Customer Dropdown */}
-                <TouchableOpacity
-                  onPress={() =>
-                    setPreferencesOpen(
-                      preferencesOpen === 'customer' ? '' : 'customer',
-                    )
-                  }
-                  style={styles.menuItem}
-                >
-                  <View style={styles.menuIcon}>
-                    <Users size={24} />
-                    <Text style={styles.menuText}>Customers Panel</Text>
-                  </View>
-
-                  <Text style={styles.arrowIcon}>
-                    {preferencesOpen === 'customer' ? '▲' : '▼'}
-                  </Text>
-                </TouchableOpacity>
-                {preferencesOpen === 'customer' && (
-                  <View style={styles.dropdownContainer}>
-                    {user?.role_name === 'superadmin' && (
-                      <TouchableOpacity
-                        style={styles.dropdownItem}
-                        onPress={() => handleNavigation('AddCustomer')}
-                      >
-                        <View style={styles.menuIcon}>
-                          <File size={20} />
-                          <Text
-                            style={[
-                              styles.dropdownItemText,
-                              currentRoute === 'AddCustomer' &&
-                                styles.activeText,
-                            ]}
-                          >
-                            Add Customer
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    )}
-                    <TouchableOpacity
-                      style={styles.dropdownItem}
-                      onPress={() => handleNavigation('CustomersList')}
-                    >
-                      <View style={styles.menuIcon}>
-                        <File size={20} />
-                        <Text
-                          style={[
-                            styles.dropdownItemText,
-                            currentRoute === 'CustomersList' &&
-                              styles.activeText,
-                          ]}
-                        >
-                          Customer List
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                )}
-
-                {/* Payment Dropdown */}
-                <TouchableOpacity
-                  onPress={() =>
-                    setPreferencesOpen(
-                      preferencesOpen === 'payment' ? '' : 'payment',
-                    )
-                  }
-                  style={styles.menuItem}
-                >
-                  <View style={styles.menuIcon}>
-                    <CreditCard size={24} />
-                    <Text style={styles.menuText}>Payments Panel</Text>
-                  </View>
-
-                  <Text style={styles.arrowIcon}>
-                    {preferencesOpen === 'payment' ? '▲' : '▼'}
-                  </Text>
-                </TouchableOpacity>
-                {preferencesOpen === 'payment' && (
-                  <View style={styles.dropdownContainer}>
-                    <TouchableOpacity
-                      style={styles.dropdownItem}
-                      onPress={() => handleNavigation('AddPayment')}
-                    >
-                      <View style={styles.menuIcon}>
-                        <File size={20} />
-                        <Text
-                          style={[
-                            styles.dropdownItemText,
-                            currentRoute === 'AddPayment' && styles.activeText,
-                          ]}
-                        >
-                          Add Payment
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.dropdownItem}
-                      onPress={() => handleNavigation('PaymentsList')}
-                    >
-                      <View style={styles.menuIcon}>
-                        <File size={20} />
-                        <Text
-                          style={[
-                            styles.dropdownItemText,
-                            currentRoute === 'PaymentsList' &&
-                              styles.activeText,
-                          ]}
-                        >
-                          Payments List
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
                 )}
               </View>
+
               <TouchableOpacity
-                style={styles.logoutItem}
-                onPress={() => logout()}
+                onPress={() => handleNavigation('HomeScreen')}
+                style={[
+                  styles.menuItem,
+                  currentRoute === 'HomeScreen' && styles.activeMenuItem,
+                ]}
               >
-                <LogOut size={24} />
-                <Text style={styles.menuText}>Logout</Text>
+                <View style={styles.menuIcon}>
+                  <House size={visible ? 30 : 24} />
+                  {visible && (
+                    <View style={styles.menuIcon}>
+                      <Text style={styles.menuText}>Dashboardd</Text>
+                      <Text style={styles.arrowIcon}></Text>
+                    </View>
+                  )}
+                </View>
               </TouchableOpacity>
-            </ScrollView>
-          )}
+
+              {/* Managers Submenu Dropdown */}
+              <TouchableOpacity
+                onPress={() =>
+                  setPreferencesOpen(
+                    preferencesOpen === 'manager' ? '' : 'manager',
+                  )
+                }
+                style={styles.menuItem}
+              >
+                <View style={styles.menuIcon}>
+                  <Users size={24} />
+                  {visible && (
+                    <View style={styles.menuIcon}>
+                      <Text style={styles.menuText}>Managers Panel</Text>
+                      <Text style={styles.arrowIcon}>
+                        {preferencesOpen === 'manager' ? '▲' : '▼'}
+                      </Text>
+                    </View>
+                  )}
+                </View>
+              </TouchableOpacity>
+              {preferencesOpen === 'manager' && (
+                <View style={styles.dropdownContainer}>
+                  {user?.role_name === 'superadmin' && (
+                    <TouchableOpacity
+                      style={styles.dropdownItem}
+                      onPress={() => handleNavigation('AddManager')}
+                    >
+                      <View style={styles.menuIcon}>
+                        <File size={20} />
+                        <Text
+                          style={[
+                            styles.dropdownItemText,
+                            currentRoute === 'AddManager' && styles.activeText,
+                          ]}
+                        >
+                          Add Manager
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                  <TouchableOpacity
+                    style={styles.dropdownItem}
+                    onPress={() => handleNavigation('Manager')}
+                  >
+                    <View style={styles.menuIcon}>
+                      <File size={20} />
+                      <Text
+                        style={[
+                          styles.dropdownItemText,
+                          currentRoute === 'Manager' && styles.activeText,
+                        ]}
+                      >
+                        Manager
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.dropdownItem}
+                    onPress={() => handleNavigation('ManagersList')}
+                  >
+                    <View style={styles.menuIcon}>
+                      <File size={20} />
+                      <Text
+                        style={[
+                          styles.dropdownItemText,
+                          currentRoute === 'ManagersList' && styles.activeText,
+                        ]}
+                      >
+                        Managers List
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              )}
+
+              {/* Customer Dropdown */}
+              <TouchableOpacity
+                onPress={() =>
+                  setPreferencesOpen(
+                    preferencesOpen === 'customer' ? '' : 'customer',
+                  )
+                }
+                style={styles.menuItem}
+              >
+                <View style={styles.menuIcon}>
+                  <Users size={24} />
+                  {visible && (
+                    <View style={styles.menuIcon}>
+                      <Text style={styles.menuText}>Customers Panel</Text>
+                      <Text style={styles.arrowIcon}>
+                        {preferencesOpen === 'manager' ? '▲' : '▼'}
+                      </Text>
+                    </View>
+                  )}
+                </View>
+              </TouchableOpacity>
+              {preferencesOpen === 'customer' && (
+                <View style={styles.dropdownContainer}>
+                  {user?.role_name === 'superadmin' && (
+                    <TouchableOpacity
+                      style={styles.dropdownItem}
+                      onPress={() => handleNavigation('AddCustomer')}
+                    >
+                      <View style={styles.menuIcon}>
+                        <File size={20} />
+                        <Text
+                          style={[
+                            styles.dropdownItemText,
+                            currentRoute === 'AddCustomer' && styles.activeText,
+                          ]}
+                        >
+                          Add Customer
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                  <TouchableOpacity
+                    style={styles.dropdownItem}
+                    onPress={() => handleNavigation('CustomersList')}
+                  >
+                    <View style={styles.menuIcon}>
+                      <File size={20} />
+                      <Text
+                        style={[
+                          styles.dropdownItemText,
+                          currentRoute === 'CustomersList' && styles.activeText,
+                        ]}
+                      >
+                        Customer List
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              )}
+
+              {/* Payment Dropdown */}
+              <TouchableOpacity
+                onPress={() =>
+                  setPreferencesOpen(
+                    preferencesOpen === 'payment' ? '' : 'payment',
+                  )
+                }
+                style={styles.menuItem}
+              >
+                <View style={styles.menuIcon}>
+                  <CreditCard size={24} />
+                  {visible && (
+                    <View style={styles.menuIcon}>
+                      <Text style={styles.menuText}>Payments Panel</Text>
+                      <Text style={styles.arrowIcon}>
+                        {preferencesOpen === 'manager' ? '▲' : '▼'}
+                      </Text>
+                    </View>
+                  )}
+                </View>
+              </TouchableOpacity>
+              {preferencesOpen === 'payment' && (
+                <View style={styles.dropdownContainer}>
+                  <TouchableOpacity
+                    style={styles.dropdownItem}
+                    onPress={() => handleNavigation('AddPayment')}
+                  >
+                    <View style={styles.menuIcon}>
+                      <File size={20} />
+                      <Text
+                        style={[
+                          styles.dropdownItemText,
+                          currentRoute === 'AddPayment' && styles.activeText,
+                        ]}
+                      >
+                        Add Payment
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.dropdownItem}
+                    onPress={() => handleNavigation('PaymentsList')}
+                  >
+                    <View style={styles.menuIcon}>
+                      <File size={20} />
+                      <Text
+                        style={[
+                          styles.dropdownItemText,
+                          currentRoute === 'PaymentsList' && styles.activeText,
+                        ]}
+                      >
+                        Payments List
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+            <TouchableOpacity
+              style={styles.logoutItem}
+              onPress={() => logout()}
+            >
+              <LogOut size={24} />
+              {visible && (
+                <View style={styles.menuIcons}>
+                  <Text style={styles.menuText}>LogOut</Text>
+                </View>
+              )}
+            </TouchableOpacity>
+          </ScrollView>
         </View>
 
         {/* ─── DYNAMIC CORE INJECTED SCREEN CONTENT ─── */}
@@ -342,11 +364,11 @@ const StackNavigation = () => {
   const isTab = width > 768 && width <= 1024;
   const isMobile = width <= 768;
 
-  let sidebarWidth = '0%';
+  let sidebarWidth = '0';
   if (visible) {
     if (isDesktop) sidebarWidth = '20%';
     else if (isTab) sidebarWidth = '30%';
-    else sidebarWidth = '70%';
+    else sidebarWidth = '60%';
   }
 
   const mainScreenWidth =
@@ -494,6 +516,7 @@ const styles = StyleSheet.create({
   subText: { color: '#CCCCCC', fontSize: 11, marginTop: 2 },
   mainBodyFrame: { flex: 1, flexDirection: 'row' },
   sidebar: {
+    //position: 'relative',
     paddingVertical: 40,
     backgroundColor: COLOR.sidebarBackground,
     borderRightWidth: 1,
@@ -501,6 +524,12 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     boxShadow:
       '4px 4px 12px 0px rgba(120, 140, 135, 0.35), -4px -4px 10px 0px rgba(255, 255, 255, 0.75)',
+    ...Platform.select({
+      web: {
+        transitionProperty: 'width',
+        transitionDuration: '0.2s',
+      },
+    }),
   },
   mobileSidebarOverlay: {
     position: 'absolute',
@@ -515,6 +544,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     justifyContent: 'space-between',
   },
+  toggleButtonMenu: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  },
+  toggleButtonText: {
+    color: COLOR.darkCharcoalBrown,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  sidebarProfile: {
+    alignItems: 'center',
+    marginVertical: 20,
+  },
   sidebarTitle: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -523,7 +566,7 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 12,
     borderBottomWidth: 1,
@@ -532,7 +575,10 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   menuIcon: {
+    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     gap: 15,
   },
   activeMenuItem: { backgroundColor: '#f0e6ff', borderRadius: 12 },
@@ -567,6 +613,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   mainScreenContent: { flex: 1, backgroundColor: COLOR.mainBackground },
+
+  mainScreenArea: {
+    flex: 1,
+    height: '100%',
+  },
 });
 
 export default StackNavigation;
