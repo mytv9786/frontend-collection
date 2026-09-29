@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   StatusBar,
   Platform,
+  Dimensions,
 } from 'react-native';
 
 import {
@@ -55,6 +56,7 @@ const AppAuthenticatedShell = ({
   const [preferencesOpen, setPreferencesOpen] = useState('');
   const { logout, user } = useContext(AuthContext);
   const { width } = useWindowDimensions();
+  const { height: sHeight } = Dimensions.get('screen');
 
   const isMobile = width <= 768;
 
@@ -105,12 +107,7 @@ const AppAuthenticatedShell = ({
               >
                 <View style={styles.menuIcon}>
                   <House size={visible ? 30 : 24} />
-                  {visible && (
-                    <View style={styles.menuIcon}>
-                      <Text style={styles.menuText}>Dashboardd</Text>
-                      <Text style={styles.arrowIcon}></Text>
-                    </View>
-                  )}
+                  <Text style={styles.menuText}>Dashboardd</Text>
                 </View>
               </TouchableOpacity>
 
@@ -124,15 +121,13 @@ const AppAuthenticatedShell = ({
                 style={styles.menuItem}
               >
                 <View style={styles.menuIcon}>
-                  <Users size={24} />
-                  {visible && (
-                    <View style={styles.menuIcon}>
-                      <Text style={styles.menuText}>Managers Panel</Text>
-                      <Text style={styles.arrowIcon}>
-                        {preferencesOpen === 'manager' ? '▲' : '▼'}
-                      </Text>
-                    </View>
-                  )}
+                  <View style={styles.menuIcon}>
+                    <Users size={24} />
+                    <Text style={styles.menuText}>Managers Panel</Text>
+                  </View>
+                  <Text style={styles.arrowIcon}>
+                    {preferencesOpen === 'manager' ? '▲' : '▼'}
+                  </Text>
                 </View>
               </TouchableOpacity>
               {preferencesOpen === 'manager' && (
@@ -200,15 +195,13 @@ const AppAuthenticatedShell = ({
                 style={styles.menuItem}
               >
                 <View style={styles.menuIcon}>
-                  <Users size={24} />
-                  {visible && (
-                    <View style={styles.menuIcon}>
-                      <Text style={styles.menuText}>Customers Panel</Text>
-                      <Text style={styles.arrowIcon}>
-                        {preferencesOpen === 'manager' ? '▲' : '▼'}
-                      </Text>
-                    </View>
-                  )}
+                  <View style={styles.menuIcon}>
+                    <Users size={24} />
+                    <Text style={styles.menuText}>Customers Panel</Text>
+                  </View>
+                  <Text style={styles.arrowIcon}>
+                    {preferencesOpen === 'manager' ? '▲' : '▼'}
+                  </Text>
                 </View>
               </TouchableOpacity>
               {preferencesOpen === 'customer' && (
@@ -260,15 +253,13 @@ const AppAuthenticatedShell = ({
                 style={styles.menuItem}
               >
                 <View style={styles.menuIcon}>
-                  <CreditCard size={24} />
-                  {visible && (
-                    <View style={styles.menuIcon}>
-                      <Text style={styles.menuText}>Payments Panel</Text>
-                      <Text style={styles.arrowIcon}>
-                        {preferencesOpen === 'manager' ? '▲' : '▼'}
-                      </Text>
-                    </View>
-                  )}
+                  <View style={styles.menuIcon}>
+                    <CreditCard size={24} />
+                    <Text style={styles.menuText}>Payments Panel</Text>
+                  </View>
+                  <Text style={styles.arrowIcon}>
+                    {preferencesOpen === 'manager' ? '▲' : '▼'}
+                  </Text>
                 </View>
               </TouchableOpacity>
               {preferencesOpen === 'payment' && (
@@ -496,7 +487,11 @@ const styles = StyleSheet.create({
     ...Platform.select({
       web: {
         width: '100vw',
-        height: '100vh',
+        height:
+          Platform.OS === 'web' && /Android|iPhone/i.test(navigator.userAgent)
+            ? '100dvh'
+            : '100vh',
+        overflowY: 'auto', // కంటెంట్ ఎక్కువైతే స్క్రీన్ లోపలే స్క్రోల్ అవుతుంది
       },
     }),
   },
@@ -566,7 +561,7 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 12,
     borderBottomWidth: 1,
@@ -577,7 +572,7 @@ const styles = StyleSheet.create({
   menuIcon: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    //justifyContent: 'space-between',
     alignItems: 'center',
     gap: 15,
   },
